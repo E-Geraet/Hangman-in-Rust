@@ -29,5 +29,3 @@ I also used the `rand` crate to pick a random word and `std::io` to handle user 
 - Let players choose the type of words to guess (like animals or tech terms).
 - Make input checks clearer and improve the game-over messages.
 - Optimize how the game stores and checks guessed letters.
-
-"C:\Users\sambi\OneDrive\documents\zoom\2024-11-14 16.28.07 sam bingham's zoom meeting\video1402615852.mp4"
