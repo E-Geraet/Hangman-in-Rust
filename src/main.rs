@@ -1,5 +1,6 @@
 use std::io::{self, Write};
 use rand::seq::SliceRandom;
+use std::process::Command;
 
 // Define the Game struct to hold game state
 struct Game {
@@ -36,17 +37,23 @@ impl Game {
 
     // Display the hangman figure based on the number of attempts left
     fn display_hangman(&self) {
-        let hangman_stages = [
-            "\n\n\n\n\n\n",       // No incorrect guesses yet
-            "\n\n\n\n\nO",        // 1 incorrect guess
-            "\n\n\n\n\\O",        // 2 incorrect guesses
-            "\n\n\n\n\\O/",       // 3 incorrect guesses
-            "\n\n\n\n\\O/\n |",   // 4 incorrect guesses
-            "\n\n\n\n\\O/\n |\n/", // 5 incorrect guesses
-            "\n\n\n\n\\O/\n |\n/ \\", // 6 incorrect guesses (last stage)
-        ];
-        // Print the appropriate hangman stage based on attempts left
-        println!("{}", hangman_stages[7 - self.attempts_left as usize]);
+        let image_path = format!("images/stage_{}.png", 7 - self.attempts_left);
+        if cfg!(target_os = "windows") {
+            Command::new("cmd")
+                .args(&["/C", "start", &image_path])
+                .spawn()
+                .expect("Failed to open image");
+        } else if cfg!(target_os = "macos") {
+            Command::new("open")
+                .arg(image_path)
+                .spawn()
+                .expect("Failed to open image");
+        } else if cfg!(target_os = "linux") {
+            Command::new("xdg-open")
+                .arg(image_path)
+                .spawn()
+                .expect("Failed to open image");
+        }
     }
 
     // Handle a letter guess

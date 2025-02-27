@@ -1,1 +1,1 @@
-C:\AppProg\hangman_game\target\debug\hangman_game.exe: C:\AppProg\hangman_game\src\main.rs
+C:\Users\student\hangman-game\target\debug\hangman_game.exe: C:\Users\student\hangman-game\src\main.rs
